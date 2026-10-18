@@ -1,0 +1,51 @@
+@model Animal
+@{
+    ViewData["Title"] = "Editar animal";
+}
+
+<h1>Editar animal</h1>
+
+<form asp-action="Editar" class="formulario"
+      data-titulo="Confirmar edição"
+      data-confirmar="Deseja salvar as alterações deste animal?">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="campo">
+        <label asp-for="Nome"></label>
+        <input asp-for="Nome" />
+        <span asp-validation-for="Nome"></span>
+    </div>
+    <div class="campo">
+        <label asp-for="Especie"></label>
+        <input asp-for="Especie" />
+        <span asp-validation-for="Especie"></span>
+    </div>
+    <div class="campo">
+        <label asp-for="DataChegada"></label>
+        <input asp-for="DataChegada" />
+        <span asp-validation-for="DataChegada"></span>
+    </div>
+    <div class="campo">
+        <label asp-for="Habitat"></label>
+        <select asp-for="Habitat" asp-items="Html.GetEnumSelectList<Habitat>()"></select>
+    </div>
+    <div class="campo">
+        <label asp-for="Peso"></label>
+        <input asp-for="Peso" />
+        <span asp-validation-for="Peso"></span>
+    </div>
+    <div class="campo">
+        <label asp-for="Dieta"></label>
+        <select asp-for="Dieta" asp-items="(SelectList)ViewBag.Dietas">
+            <option value="">Selecione...</option>
+        </select>
+        <span asp-validation-for="Dieta"></span>
+    </div>
+    <div class="campo">
+        <label asp-for="Observacoes"></label>
+        <textarea asp-for="Observacoes" rows="3"></textarea>
+    </div>
+
+    <button type="submit"><span class="icone i-salvar"></span> Salvar</button>
+    <a asp-action="Listar">Cancelar</a>
+</form>

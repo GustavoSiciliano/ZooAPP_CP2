@@ -1,0 +1,11 @@
+Checkpoint 2
+
+Integrantes:
+Gustavo de Jesus - RM567926
+Gustavo Siciliano - RM568419
+Samuel Keniti - RM567614
+Manuel Pedro - RM567458
+Vinicius Morrone - RM566884
+
+Link do GitHub
+https://github.com/GustavoSiciliano/ZooAPP_CP2

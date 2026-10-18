@@ -1,0 +1,45 @@
+@model Animal
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>@Model.Nome</h1>
+
+<table class="detalhes">
+    <tr>
+        <th scope="row">Espécie</th>
+        <td>@Model.Especie</td>
+    </tr>
+    <tr>
+        <th scope="row">Chegada</th>
+        <td>@Model.DataChegada.ToString("dd/MM/yyyy")</td>
+    </tr>
+    <tr>
+        <th scope="row">Habitat</th>
+        <td>@Model.Habitat</td>
+    </tr>
+    <tr>
+        <th scope="row">Peso</th>
+        <td>@Model.Peso.ToString("N1") kg</td>
+    </tr>
+    <tr>
+        <th scope="row">Dieta</th>
+        <td><dieta valor="@Model.Dieta"></dieta></td>
+    </tr>
+    <tr>
+        <th scope="row">Observações</th>
+        <td>
+            @if (string.IsNullOrWhiteSpace(Model.Observacoes))
+            {
+                <span>-</span>
+            }
+            else
+            {
+                @Model.Observacoes
+            }
+        </td>
+    </tr>
+</table>
+
+<a asp-action="Editar" asp-route-id="@Model.Id"><span class="icone i-lapis"></span> Editar</a>
+<a asp-action="Listar">Voltar</a>

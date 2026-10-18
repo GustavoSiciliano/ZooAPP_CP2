@@ -1,0 +1,60 @@
+@model List<Animal>
+@{
+    ViewData["Title"] = "Animais";
+}
+
+<h1>Animais do zoológico</h1>
+
+<alerta mensagem="@(TempData["Msg"] as string)"></alerta>
+
+<form method="get" class="busca">
+    <div class="busca-campos">
+        <input name="busca" value="@ViewBag.Busca" placeholder="Buscar por nome" />
+        <button type="submit"><span class="icone i-busca"></span> Buscar</button>
+        <a class="botao secundario" asp-action="Listar"><span class="icone i-x"></span> Limpar</a>
+    </div>
+    <a class="botao" asp-action="Cadastrar"><span class="icone i-mais"></span> Novo animal</a>
+</form>
+
+@if (Model.Count == 0)
+{
+    <p>Nenhum animal encontrado.</p>
+}
+else
+{
+    <div class="tabela-rolagem">
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Espécie</th>
+                <th>Chegada</th>
+                <th>Habitat</th>
+                <th>Peso</th>
+                <th>Dieta</th>
+                <th>Ações</th>
+            </tr>
+            @foreach (Animal animal in Model)
+            {
+                <tr>
+                    <td>@animal.Nome</td>
+                    <td>@animal.Especie</td>
+                    <td>@animal.DataChegada.ToString("dd/MM/yyyy")</td>
+                    <td>@animal.Habitat</td>
+                    <td>@animal.Peso.ToString("N1") kg</td>
+                    <td><dieta valor="@animal.Dieta"></dieta></td>
+                    <td class="acoes">
+                        <a asp-action="Detalhes" asp-route-id="@animal.Id"><span class="icone i-olho"></span> Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@animal.Id"><span class="icone i-lapis"></span> Editar</a>
+                        <button type="button" class="link perigo botao-excluir"
+                                data-nome="@animal.Nome"
+                                data-url="@Url.Action("Excluir", "Animais", new { id = animal.Id })">
+                            <span class="icone i-lixo"></span> Excluir
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+<form id="formExcluir" method="post"></form>
